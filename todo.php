@@ -1,3 +1,4 @@
+
 <?php
 
 // Create array to hold list of todo items
@@ -5,11 +6,11 @@ $items = array();
 
 // The loop!
 do {
-    // Iterate through list items
+    //Iterate through list items
     foreach ($items as $key => $item) {
         // Display each item and a newline
         echo "[{$key}] {$item}\n";
-    }
+}
 
     // Show the menu options
     echo '(N)ew item, (R)emove item, (Q)uit : ';
@@ -17,6 +18,7 @@ do {
     // Get the input from user
     // Use trim() to remove whitespace and newlines
     $input = trim(fgets(STDIN));
+    $input = strtoupper($input);
 
     // Check for actionable input
     if ($input == 'N') {
