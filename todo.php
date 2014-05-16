@@ -1,9 +1,7 @@
 <?php
 
 // Create array to hold list of todo items
-$items = array('');
-// array_unshift($items, "");
-unset($items[0]);
+$items = array();
 
 // List array items formatted for CLI
 function list_items($list)
@@ -11,7 +9,7 @@ function list_items($list)
     $result = '';
     foreach ($list as $key => $value)
     {
-        $result .= "[{$key}] TODO $value" . PHP_EOL;
+        $result .= "[" . ($key + 1) . "] TODO $value" . PHP_EOL;
     }
     return $result;
 
@@ -63,10 +61,10 @@ do
         // Remove which item?
         echo 'Enter item number to remove: ';
         // Get array key
-        $key = get_input(
-            );
+        $key = (get_input() - 1);
         // Remove from array
         unset($items[$key]);
+        $items = array_values($items);
     }
 // Exit when input is (Q)uit
 }
