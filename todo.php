@@ -36,13 +36,37 @@ function get_input($upper = false)
 //     }
 }
 
+//Sort menu
+function sort_menu($items)
+{
+    echo '(A) - Z, (Z) - A, (O)rder Entered, (R)everse order entered:' . PHP_EOL;
+    $input = get_input(TRUE);
+    if ($input == 'A')
+    {
+       sort($items);
+    }
+    elseif ($input == 'Z')
+    {
+        rsort($items);
+    }
+    elseif ($input == 'O')
+    {
+        ksort($items);
+    }
+    elseif ($input == 'R')
+    {
+        krsort($items);
+    }
+return $items;
+}
+
 // The loop!
 do
 {
     // Echo the list produced by the function
     echo list_items($items);
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (Q)uit : ';
+    echo '(N)ew item, (S)ort (R)emove item, (Q)uit : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -56,14 +80,18 @@ do
         // Add entry to list array
         $items[] = get_input();
     }
+    elseif ($input == 'S')
+    {
+        $items = sort_menu($items);
+    }
     elseif ($input == 'R')
     {
         // Remove which item?
         echo 'Enter item number to remove: ';
         // Get array key
-        $key = (get_input() - 1);
+        $key = get_input();
         // Remove from array
-        unset($items[$key]);
+        unset($items[$key - 1]);
         $items = array_values($items);
     }
 // Exit when input is (Q)uit
