@@ -40,22 +40,20 @@ function get_input($upper = false)
 function sort_menu($items)
 {
     echo '(A) - Z, (Z) - A, (O)rder Entered, (R)everse order entered:' . PHP_EOL;
-    $input = get_input(TRUE);
-    if ($input == 'A')
+    switch(get_input(TRUE))
     {
-       sort($items);
-    }
-    elseif ($input == 'Z')
-    {
-        rsort($items);
-    }
-    elseif ($input == 'O')
-    {
-        ksort($items);
-    }
-    elseif ($input == 'R')
-    {
-        krsort($items);
+        case 'A':
+            asort($items);
+            break;
+        case 'Z':
+            arsort($items);
+            break;
+        case 'O':
+            ksort($items);
+            break;
+        case 'R':
+            krsort($items);
+            break;
     }
 return $items;
 }
@@ -92,7 +90,6 @@ do
         $key = get_input();
         // Remove from array
         unset($items[$key - 1]);
-        $items = array_values($items);
     }
 // Exit when input is (Q)uit
 }
