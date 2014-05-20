@@ -55,7 +55,7 @@ function sort_menu($items)
             krsort($items);
             break;
     }
-return $items;
+    return $items;
 }
 
 // The loop!
@@ -86,16 +86,15 @@ do
         echo 'Enter item: ';
         $item = get_input();
         echo 'Add to (B)eginning or (E)nd of the list? ';
-        $add = get_input(TRUE);
-        if ($add == 'B')
+        $input = get_input(TRUE);
+        if ($input == 'B')
         {
         // Add entry to list array
-        array_unshift($items, $item);
+            array_unshift($items, $item);
         }
         else
         {
             $items[] = $item;
-
         }
     }
     elseif ($input == 'S')
