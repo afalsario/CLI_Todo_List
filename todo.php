@@ -39,7 +39,7 @@ function get_input($upper = false)
 //Sort menu
 function sort_menu($items)
 {
-    echo '(A) - Z, (Z) - A, (O)rder Entered, (R)everse order entered:' . PHP_EOL;
+    echo '(A) - Z, (Z) - A, (O)rder Entered, (R)everse order entered: ';
     switch(get_input(TRUE))
     {
         case 'A':
@@ -70,13 +70,33 @@ do
     // Use trim() to remove whitespace and newlines
     $input = get_input(TRUE);
 
+    if ($input == 'F')
+    {
+        array_shift($items);
+    }
+    elseif ($input == 'L')
+    {
+        $last = array_pop($items);
+    }
+
     // Check for actionable input
     if ($input == 'N')
     {
         // Ask for entry
         echo 'Enter item: ';
+        $item = get_input();
+        echo 'Add to (B)eginning or (E)nd of the list? ';
+        $add = get_input(TRUE);
+        if ($add == 'B')
+        {
         // Add entry to list array
-        $items[] = get_input();
+        array_unshift($items, $item);
+        }
+        else
+        {
+            $items[] = $item;
+
+        }
     }
     elseif ($input == 'S')
     {
