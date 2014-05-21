@@ -26,14 +26,6 @@ function get_input($upper = false)
 {
     $result = trim(fgets(STDIN));
     return $upper ? strtoupper($result) : $result;
-//     if ($upper)
-//     {
-//         return strtoupper($result);
-//     }
-//     else
-//     {
-//         return $result;
-//     }
 }
 
 //Sort menu
@@ -58,13 +50,26 @@ function sort_menu($items)
     return $items;
 }
 
+function get_items($file, $list)
+{
+    $handle = fopen($file, 'r');
+    $contents = trim(fread($handle, filesize($file)));
+    $contents_array = explode("\n", $contents);
+    foreach ($contents_array as $value)
+    {
+        array_push($list, $value);
+    }
+     fclose($handle);
+     return($list);
+}
+
 // The loop!
 do
 {
     // Echo the list produced by the function
     echo list_items($items);
     // Show the menu options
-    echo '(N)ew item, (S)ort (R)emove item, (Q)uit : ';
+    echo '(N)ew item, (S)ort (R)emove item, (F)ile Menu, (Q)uit : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -110,12 +115,17 @@ do
         // Remove from array
         unset($items[$key - 1]);
     }
+    elseif ($input == 'F')
+    {
+        echo 'Open File: ';
+        $file = get_input();
+        $items = get_items($file, $items);
+    }
 // Exit when input is (Q)uit
 }
 while ($input != 'Q');
 
 // Say Goodbye!
 echo "Goodbye!\n";
-
 // Exit with 0 errors
 exit(0);
