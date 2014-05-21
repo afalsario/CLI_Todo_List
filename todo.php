@@ -50,17 +50,20 @@ function sort_menu($items)
     return $items;
 }
 
-function get_items($file, $list)
+function get_items($file, $array)
 {
-    $handle = fopen($file, 'r');
-    $contents = trim(fread($handle, filesize($file)));
-    $contents_array = explode("\n", $contents);
-    foreach ($contents_array as $value)
+    if(is_readable($file))
     {
-        array_push($list, $value);
+        $handle = fopen($file, 'r');
+        $contents = trim(fread($handle, filesize($file)));
+        $list = explode("\n", $contents);
+            foreach ($list as $value)
+            {
+                array_push($array, $value);
+            }
     }
      fclose($handle);
-     return($list);
+     return($array);
 }
 
 // The loop!
